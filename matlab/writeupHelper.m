@@ -1,4 +1,4 @@
-% Q1
+% Q1.1
 clear;
 % [filterBank] = createFilterBank();
 % image = imread('../data/campus/sun_dsrzpdstrwqbspik.jpg');
@@ -18,14 +18,15 @@ clear;
 %      imshow(result)
 % end
 
+% Q1.2
 % Parameters
 alpha = 200;
-k = 0.04;
 
 % Load image 1
-img = imread('../data/campus/sun_bqeqcysqtvxgmkas.jpg');
+img = imread('../data/bedroom/sun_ajenyvgoteenliuj.jpg');
 
 % getHarrisPoints
-points = getRandomPoints(img, alpha);
+% points = getRandomPoints(img, alpha);
+points = getHarrisPoints(img, alpha, 0.06);
 imshow(img); hold on; plot(points(:, 2), points(:, 1), '.', 'markerSize', 10);
 

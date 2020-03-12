@@ -1,5 +1,5 @@
 function [points] = getHarrisPoints(I, alpha, k)
-    I = double(rgb2gray(I));
+    I = double(rgb2gray(I))
     
     % precompute the image's X and Y gradients
     [Ix, Iy] = gradient(I);
@@ -7,11 +7,10 @@ function [points] = getHarrisPoints(I, alpha, k)
     [Iyx, Iy2] = gradient(Iy);
     
     % compute the covariance matrix
-    window = ones(3, 3);
-    M11 = conv2(Ix2, window, 'same');
-    M12 = conv2(Ixy, window, 'same');
-    M21 = conv2(Iyx, window, 'same');
-    M22 = conv2(Iy2, window, 'same');
+    M11 = imfilter(Ixx, window);
+    M12 = imfilter(Ixy, window);
+    M21 = imfilter(Iyx, window);
+    M22 = imfilter(Iyy, window);
     
     % compute the response function
     detM = M11 .* M22 - M12 .* M21;
@@ -19,10 +18,5 @@ function [points] = getHarrisPoints(I, alpha, k)
     R = detM - ktrM2;
     
     % non-max suppression
-    [~, idx] = sort(R(:), 'descend');
-    selectedIdx = idx(1:alpha);
-    
-    % get the result
-    [row, col] = ind2sub(size(I), selectedIdx);
-    points = [row, col];
+    [~, idx]
 end
