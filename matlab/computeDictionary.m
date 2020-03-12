@@ -1,14 +1,13 @@
 clear;
-% loading the training image paths
-traintest = load('../data/traintest.mat');
-trainImageNames = traintest.train_imagenames;
 
 alpha = 500;
 K = 100;
 filterBank = createFilterBank();
+% loading the training image paths
+traintest = load('../data/traintest.mat');
+trainImageNames = traintest.train_imagenames;
 
-dictionary = getDictionary(trainImageNames, alpha, K, 'random');
-save('dictionaryRandom.mat', 'filterBank', 'dictionary');
-
-dictionary = getDictionary(trainImageNames, alpha, K, 'harris');
-save('dictionaryHarris.mat', 'filterBank', 'dictionary');
+dictionaryRandom = getDictionary(trainImageNames, alpha, K, 'random');
+save('dictionaryRandom.mat', 'filterBank', 'dictionaryRandom');
+dictionaryHarris = getDictionary(trainImageNames, alpha, K, 'harris');
+save('dictionaryHarris.mat', 'filterBank', 'dictionaryHarris');

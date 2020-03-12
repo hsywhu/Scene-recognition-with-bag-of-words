@@ -1,4 +1,4 @@
-function batchToVisualWords(numCores) 
+function batchToVisualWords(numCores, dictionaryName) 
 
 % Does parallel computation of the visual words 
 %
@@ -25,10 +25,18 @@ parpool('local', numCores);
 
 %load the files and texton dictionary
 load('traintest.mat','all_imagenames','mapping');
-load('dictionary.mat','filterBank','dictionary');
+if strcmp(dictionaryName, 'random')
+    load('dictionaryRandom.mat','filterBank','dictionary');
+elseif strcmp(dictionaryName, 'harris')
+    load('dictionaryHarris.mat','filterBank','dictionary');
+end
 
 source = '../data/';
-target = '../data/'; 
+if strcmp(dictionaryName, 'random')
+    target = '../data/dictionaryRandom/'; 
+elseif strcmp(dictionaryName, 'harris')
+    target = '../data/dictionaryHarris/'; 
+end
 
 if ~exist(target,'dir')
     mkdir(target);
@@ -53,7 +61,7 @@ wordRepresentation = cell(l,1);
 parfor i=1:l
     fprintf('Converting to visual words %s\n', all_imagenames{i});
     image = imread([source, all_imagenames{i}]);
-    wordRepresentation{i} = getVisualWords(image, filterBank, dictionary');
+    wordRepresentation{i} = getVisualWords(image, filterBank, dictionary);
 end
 
 %dump the files
