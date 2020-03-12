@@ -3,7 +3,7 @@ function [filterResponses] = extractFilterResponses(I, filterBank)
     [rowNum, colNum, channelNum] = size(I);
     % only rgb images can be processed
     if channelNum == 1
-        I(:, :, ones(1,3))
+       img = cat(3, img, img, img);
     end
     
     [LRes, aRes, bRes] = RGB2Lab(I(:, :, 1), I(:, :, 2), I(:, :, 3));
