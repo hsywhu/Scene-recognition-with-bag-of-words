@@ -3,12 +3,13 @@ function [dictionary] = getDictionary(imgPaths, alpha, K, method)
     imgPaths = string(imgPaths);
     pixelResponses = zeros(alpha * length(imgPaths), 3 * length(filterBank));
     for i = 1:length(imgPaths)
+        disp(strcat('progress: ', string(i/length(imgPaths))));
         imgPath = strcat('../data/', imgPaths(i));
         img = imread(imgPath);
-         [~, ~, channelNum] = size(img);
+         [rowNum, colNum, channelNum] = size(img);
         % only rgb images can be processed
         if channelNum == 1
-            img(:, :, ones(1,3))
+            img = cat(3, img, img, img);
         end
         filterResponses = extractFilterResponses(img, filterBank);
         if (strcmp(method, 'random'))
@@ -16,8 +17,11 @@ function [dictionary] = getDictionary(imgPaths, alpha, K, method)
         elseif (strcmp(method, 'harris'))
             points = getHarrisPoints(img, alpha, 0.04);
         end
-        for j = 1:alpha
-            pixelResponses(alpha*(i-1)+j, :) = filterResponses(points(j,2), points(j, 1), :);
-        end
+        points = sub2ind(size(img), points(:,1), points(:,2));
+        pixelResponses(alpha*(i-1)+1:alpha*i,:) = filterResponses(points, :);
+%         for pixelIdx = 1:alpha
+%             pixelResponses(alpha*(i-1)+pixelIdx, :) = filterResponses(points(pixelIdx, 1), points(pixelIdx, 2), :);
+%         end
     end
+    [~, dictionary] = kmeans(pixelResponses, K, 'EmptyAction', 'drop');
 end

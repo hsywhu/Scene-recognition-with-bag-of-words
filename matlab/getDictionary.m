@@ -1,7 +1,7 @@
 function [dictionary] = getDictionary(imgPaths, alpha, K, method)
     filterBank = createFilterBank();
-    imgPaths = string(imgPaths);
     pixelResponses = zeros(alpha * length(imgPaths), 3 * length(filterBank));
+    imgPaths = string(imgPaths);
     for i = 1:length(imgPaths)
         disp(strcat('progress: ', string(i/length(imgPaths))));
         imgPath = strcat('../data/', imgPaths(i));
@@ -12,9 +12,9 @@ function [dictionary] = getDictionary(imgPaths, alpha, K, method)
             img = cat(3, img, img, img);
         end
         filterResponses = extractFilterResponses(img, filterBank);
-        if (strcmp(method, 'random'))
+        if strcmp(method, 'random')
             points = getRandomPoints(img, alpha);
-        elseif (strcmp(method, 'harris'))
+        else
             points = getHarrisPoints(img, alpha, 0.04);
         end
         for pixelIdx = 1:alpha

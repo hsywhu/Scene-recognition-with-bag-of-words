@@ -3,7 +3,7 @@ clear;
 traintest = load('../data/traintest.mat');
 trainImageNames = traintest.train_imagenames;
 
-alpha = 50;
+alpha = 500;
 K = 100;
 filterBank = createFilterBank();
 
