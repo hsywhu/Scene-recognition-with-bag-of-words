@@ -7,7 +7,7 @@ function [points] = getHarrisPoints(I, alpha, k)
     [Iyx, Iy2] = gradient(Iy);
     
     % compute the covariance matrix
-    window = ones(3, 3);
+    window = ones(5, 5);
     M11 = conv2(Ix2, window, 'same');
     M12 = conv2(Ixy, window, 'same');
     M21 = conv2(Iyx, window, 'same');

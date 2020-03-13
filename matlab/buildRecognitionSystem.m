@@ -1,3 +1,5 @@
+clear;
+
 % load from traintest.mat
 traintest = load('../data/traintest.mat');
 trainImagenames = traintest.train_imagenames;
@@ -23,5 +25,13 @@ for i = 1:length(trainImagenames)
     feature = getImageFeatures(wordMap, size(dictionaryHarris, 1));
     trainFeaturesHarris(i, :) = feature;
 end
-save('visionRandom.mat', 'dictionaryRandom', 'filterBank', 'trainFeaturesRandom', 'trainLabels');
-save('visionHarris.mat', 'dictionaryHarris', 'filterBank', 'trainFeaturesHarris', 'trainLabels');
+
+% save visionRandom
+dictionary = dictionaryRandom;
+trainFeatures = trainFeaturesRandom;
+save('visionRandom.mat', 'dictionary', 'filterBank', 'trainFeatures', 'trainLabels');
+
+% save visionHarris
+dictionary = dictionaryHarris;
+trainFeatures = trainFeaturesHarris;
+save('visionHarris.mat', 'dictionary', 'filterBank', 'trainFeatures', 'trainLabels');

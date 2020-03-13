@@ -8,6 +8,9 @@ traintest = load('../data/traintest.mat');
 trainImageNames = traintest.train_imagenames;
 
 dictionaryRandom = getDictionary(trainImageNames, alpha, K, 'random');
-save('dictionaryRandom.mat', 'filterBank', 'dictionaryRandom');
+dictionary = dictionaryRandom;
+save('dictionaryRandom.mat', 'filterBank', 'dictionary');
+
 dictionaryHarris = getDictionary(trainImageNames, alpha, K, 'harris');
-save('dictionaryHarris.mat', 'filterBank', 'dictionaryHarris');
+dictionary = dictionaryHarris;
+save('dictionaryHarris.mat', 'filterBank', 'dictionary');

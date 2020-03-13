@@ -20,19 +20,19 @@ clear;
 
 % % Q1.2
 % % Parameters
-% alpha = 10;
+% alpha = 500;
 % 
 % % Load image 1
-% img = imread('../data/bedroom/sun_ajenyvgoteenliuj.jpg');
+% img = imread('../data/campus/sun_abslhphpiejdjmpz.jpg');
 % 
 % % getHarrisPoints
-% points = getRandomPoints(img, alpha);
-% % points = getHarrisPoints(img, alpha, 0.04);
+% % points = getRandomPoints(img, alpha);
+% points = getHarrisPoints(img, alpha, 0.06);
 % 
-% imshow(img); hold on; plot(points(:, 2), points(:, 1), '.', 'markerSize', 20);
+% imshow(img); hold on; plot(points(:, 2), points(:, 1), '.', 'markerSize', 15);
 
 % % test Q2.1
-% img = imread('../data/football_stadium/sun_bukymllxsmtmgczy.jpg');
+% img = imread('../data/campus/sun_bxuglofqznqijzjo.jpg');
 % 
 % dictionaryRandom = load('./dictionaryRandom.mat');
 % dictionaryRandom = dictionaryRandom.dictionary;

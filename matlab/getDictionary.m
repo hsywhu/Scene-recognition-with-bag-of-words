@@ -15,7 +15,7 @@ function [dictionary] = getDictionary(imgPaths, alpha, K, method)
         if strcmp(method, 'random')
             points = getRandomPoints(img, alpha);
         else
-            points = getHarrisPoints(img, alpha, 0.04);
+            points = getHarrisPoints(img, alpha, 0.06);
         end
         for pixelIdx = 1:alpha
             pixelResponses(alpha*(i-1)+pixelIdx, :) = filterResponses(points(pixelIdx, 1), points(pixelIdx, 2), :);
