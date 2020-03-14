@@ -38,6 +38,12 @@ plot(1:40, accList);
 xlabel('k');
 ylabel('acc');
 
-acc = accList(bestK);
+bestAcc = accList(bestK);
 confusion = zeros(classNum, classNum);
 confusion(:, :) = confusions(bestK, :, :);
+disp('best k value');
+disp(bestK);
+disp('acc with best k value');
+disp(bestAcc);
+disp('confusion matrix with best k');
+disp(confusion)

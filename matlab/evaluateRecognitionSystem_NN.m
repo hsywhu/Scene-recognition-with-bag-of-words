@@ -29,16 +29,23 @@ for i = 1:length(traintest.test_imagenames)
     randomEuclideanConfusion(label, resEuclidean(i)) = randomEuclideanConfusion(label, resEuclidean(i)) + 1;
 end
 
-randomEuclideanAcc = mean(resEuclidean == traintest.test_labels)
-randomChi2Acc = mean(resChi2 == traintest.test_labels)
-
+randomEuclideanAcc = mean(resEuclidean == traintest.test_labels);
+randomChi2Acc = mean(resChi2 == traintest.test_labels);
+disp('confusion matrix of random dictionary with euclidean distance metric');
+disp(randomEuclideanConfusion);
+disp('acc of random dictionary with euclidean distance metric');
+disp(randomEuclideanAcc);
+disp('confusion matrix of random dictionary with chi2 distance metric');
+disp(randomChi2Confusion);
+disp('acc of random dictionary with chi2 distance metric');
+disp(randomChi2Acc);
 
 % Harris
 visionHarris = load('visionHarris.mat');
 K = size(visionHarris.dictionary, 1);
 classNum = size(mapping, 2);
-randomEuclideanConfusion = zeros(classNum, classNum);
-randomChi2Confusion = zeros(classNum, classNum);
+harrisEuclideanConfusion = zeros(classNum, classNum);
+harrisChi2Confusion = zeros(classNum, classNum);
 
 resEuclidean = zeros(size(traintest.test_labels));
 resChi2 = zeros(size(traintest.test_labels));
@@ -55,9 +62,17 @@ for i = 1:length(traintest.test_imagenames)
     resChi2(i) = visionHarris.trainLabels(chi2Idx);
     resEuclidean(i) = visionHarris.trainLabels(euclideanIdx);
     label = traintest.test_labels(i);
-    randomChi2Confusion(label, resChi2(i)) = randomChi2Confusion(label, resChi2(i)) + 1;
-    randomEuclideanConfusion(label, resEuclidean(i)) = randomEuclideanConfusion(label, resEuclidean(i)) + 1;
+    harrisChi2Confusion(label, resChi2(i)) = harrisChi2Confusion(label, resChi2(i)) + 1;
+    harrisEuclideanConfusion(label, resEuclidean(i)) = harrisEuclideanConfusion(label, resEuclidean(i)) + 1;
 end
 
-harrisEuclideanAcc = mean(resEuclidean == traintest.test_labels)
-harrisChi2Acc = mean(resChi2 == traintest.test_labels)
+harrisEuclideanAcc = mean(resEuclidean == traintest.test_labels);
+harrisChi2Acc = mean(resChi2 == traintest.test_labels);
+disp('confusion matrix of harris dictionary with euclidean distance metric');
+disp(harrisEuclideanConfusion);
+disp('acc of harris dictionary with euclidean distance metric');
+disp(harrisEuclideanAcc);
+disp('confusion matrix of harris dictionary with chi2 distance metric');
+disp(harrisChi2Confusion);
+disp('acc of harris dictionary with chi2 distance metric');
+disp(harrisChi2Acc);

@@ -23,31 +23,31 @@ clear;
 % alpha = 500;
 % 
 % % Load image 1
-% img = imread('../data/campus/sun_abslhphpiejdjmpz.jpg');
+% img = imread('../data/landscape/sun_bwmhmdvisxfogksv.jpg');
 % 
 % % getHarrisPoints
 % % points = getRandomPoints(img, alpha);
 % points = getHarrisPoints(img, alpha, 0.06);
 % 
-% imshow(img); hold on; plot(points(:, 2), points(:, 1), '.', 'markerSize', 15);
+% imshow(img); hold on; plot(points(:, 2), points(:, 1), '.', 'markerSize', 10);
 
 % % test Q2.1
-% img = imread('../data/campus/sun_bxuglofqznqijzjo.jpg');
-% 
-% dictionaryRandom = load('./dictionaryRandom.mat');
-% dictionaryRandom = dictionaryRandom.dictionary;
-% dictionaryHarris = load('./dictionaryHarris.mat');
-% filterBank = dictionaryHarris.filterBank;
-% dictionaryHarris = dictionaryHarris.dictionary;
-% 
-% % random visual words
-% wordMap = getVisualWords(img, filterBank, dictionaryRandom);
-% figure; imshow(label2rgb(wordMap));
-% 
-% % harris visual words
-% wordMap = getVisualWords(img, filterBank, dictionaryHarris);
-% figure; imshow(label2rgb(wordMap));
+img = imread('../data/football_stadium/sun_byvvwensmjdeeifn.jpg');
+
+dictionaryRandom = load('./dictionaryRandom.mat');
+dictionaryRandom = dictionaryRandom.dictionary;
+dictionaryHarris = load('./dictionaryHarris.mat');
+filterBank = dictionaryHarris.filterBank;
+dictionaryHarris = dictionaryHarris.dictionary;
+
+% random visual words
+wordMap = getVisualWords(img, filterBank, dictionaryRandom);
+figure; imshow(label2rgb(wordMap));
+
+% harris visual words
+wordMap = getVisualWords(img, filterBank, dictionaryHarris);
+figure; imshow(label2rgb(wordMap));
 
 % Q2.1
-batchToVisualWords(6, 'random') ;
-batchToVisualWords(6, 'harris') ;
+% batchToVisualWords(6, 'random') ;
+% batchToVisualWords(6, 'harris') ;
