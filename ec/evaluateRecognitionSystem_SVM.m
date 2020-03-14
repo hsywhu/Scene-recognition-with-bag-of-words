@@ -1,0 +1,31 @@
+clear;
+traintest = load('../data/traintest.mat');
+visionSVM = load('visionSVM.mat');
+
+K = size(visionSVM.dictionary, 1);
+featureRes = zeros(length(traintest.test_imagenames), K);
+testImagenames = traintest.test_imagenames;
+
+addpath('../matlab');
+addpath('./libsvm-3.24/matlab');
+
+for i = 1:length(traintest.test_imagenames)
+    wordMap = load(strrep(strcat('../data/dictionaryRandom/', testImagenames{i}), '.jpg', '.mat'));
+    wordMap = wordMap.wordMap;
+    feature = getImageFeatures(wordMap, K);
+    featureRes(i, :) = feature;
+end
+trainLabels = transpose(traintest.train_labels);
+disp('svm with linear kernel')
+linearSvm = svmtrain(trainLabels, visionSVM.trainFeatures,  '-t 0 -q');
+svmpredict(traintest.test_labels', featureRes, linearSvm);
+
+fprintf(1, '\n');
+disp('svm with radial basis kernel')
+radialBasisSvm = svmtrain(trainLabels, visionSVM.trainFeatures,  '-t 2 -q');
+svmpredict(traintest.test_labels', featureRes, radialBasisSvm);
+
+fprintf(1, '\n');
+disp('svm with sigmoid kernel')
+sigmoidSvm = svmtrain(trainLabels, visionSVM.trainFeatures,  '-t 3 -q');
+svmpredict(traintest.test_labels', featureRes, sigmoidSvm);
