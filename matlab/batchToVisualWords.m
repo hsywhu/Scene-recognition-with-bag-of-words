@@ -29,6 +29,8 @@ if strcmp(dictionaryName, 'random')
     load('dictionaryRandom.mat','filterBank','dictionary');
 elseif strcmp(dictionaryName, 'harris')
     load('dictionaryHarris.mat','filterBank','dictionary');
+elseif strcmp(dictionaryName, 'randomGabor')
+    load('../ec/dictionaryRandomGabor.mat', 'dictionary')
 end
 
 source = '../data/';
@@ -36,6 +38,18 @@ if strcmp(dictionaryName, 'random')
     target = '../data/dictionaryRandom/'; 
 elseif strcmp(dictionaryName, 'harris')
     target = '../data/dictionaryHarris/'; 
+elseif strcmp(dictionaryName, 'randomGabor')
+    target = '../data/dictionaryRandomGabor/';
+    addpath('../ec/');
+    n_scales = 5;
+    n_orients = 8;
+    r = 39;
+    c = 39;
+    gaborArray = gaborFilterBank(n_scales, n_orients, r, c);
+    filterBank = cell(n_scales * n_orients,1);
+    for i = 1:length(gaborArray)
+        filterBank{i} = gaborArray(1, i).FFTkernel;
+    end
 end
 
 if ~exist(target,'dir')
