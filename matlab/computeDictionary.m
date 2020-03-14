@@ -1,7 +1,7 @@
 clear;
 
 alpha = 500;
-K = 100;
+K = 1000;
 filterBank = createFilterBank();
 % loading the training image paths
 traintest = load('../data/traintest.mat');
