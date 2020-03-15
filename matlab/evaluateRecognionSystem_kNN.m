@@ -2,7 +2,7 @@ clear;
 % random & chi2 works the best
 % load vision random
 traintest = load('../data/traintest.mat');
-visionRandom = load('visionRandom.mat');
+visionRandom = load('visionHarris.mat');
 
 % init
 trainFeatures = visionRandom.trainFeatures;
@@ -15,7 +15,7 @@ K = size(visionRandom.dictionary, 1);
 imageNum = length(traintest.test_imagenames);
 
 for i = 1:imageNum
-    imgMatPath = strrep(strcat('../data/dictionaryRandom/', traintest.test_imagenames{i}), '.jpg', '.mat');
+    imgMatPath = strrep(strcat('../data/dictionaryHarris/', traintest.test_imagenames{i}), '.jpg', '.mat');
     imgMat = load(imgMatPath);
     wordMap = imgMat.wordMap;
     h = getImageFeatures(wordMap, K);
